@@ -1,0 +1,65 @@
+name: mycenter
+
+services:
+  mycenter:
+    image: "mycenter:${MYCENTER_IMAGE_TAG:?MYCENTER_IMAGE_TAG must be set}"
+    build:
+      context: "${MYCENTER_SOURCE_DIR:-..}"
+      dockerfile: deploy/Dockerfile
+    container_name: mycenter
+    init: true
+    restart: "${MYCENTER_RESTART_POLICY:-unless-stopped}"
+    stop_grace_period: 45s
+    user: "10001:10001"
+    environment:
+      MYCENTER_DOMAIN: "${MYCENTER_DOMAIN:?MYCENTER_DOMAIN must be set}"
+      ACME_PRODUCTION: "${ACME_PRODUCTION:-false}"
+    ports:
+      - "0.0.0.0:80:80/tcp"
+      - "0.0.0.0:443:443/tcp"
+    volumes:
+      - type: volume
+        source: meshcentral-data
+        target: /opt/meshcentral/meshcentral-data
+      - type: volume
+        source: meshcentral-files
+        target: /opt/meshcentral/meshcentral-files
+      - type: volume
+        source: meshcentral-web
+        target: /opt/meshcentral/meshcentral-web
+      - type: bind
+        source: "${MYCENTER_CONFIG_PATH:-/opt/mycenter/deploy/config.json}"
+        target: /opt/meshcentral/meshcentral-data/config.json
+        read_only: true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,mode=1777,size=128m
+    healthcheck:
+      test:
+        - CMD
+        - /usr/local/bin/mycenter-healthcheck
+      interval: 30s
+      timeout: 10s
+      start_period: 90s
+      retries: 10
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "5"
+
+volumes:
+  meshcentral-data:
+    name: meshcentral-data
+  meshcentral-files:
+    name: meshcentral-files
+  meshcentral-web:
+    name: meshcentral-web
+  meshcentral-backups:
+    name: meshcentral-backups

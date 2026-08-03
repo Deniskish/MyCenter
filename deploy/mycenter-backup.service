@@ -1,0 +1,26 @@
+[Unit]
+Description=Create a consistent MyCenter backup
+Documentation=file:/opt/mycenter/src/deploy/README.md
+Requires=docker.service
+After=docker.service network-online.target mycenter.service
+Wants=network-online.target mycenter.service
+ConditionPathExists=/opt/mycenter/deploy/.env
+ConditionPathExists=/opt/mycenter/deploy/current-tools/backup.sh
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/opt/mycenter/deploy
+ExecStart=/opt/mycenter/deploy/current-tools/backup.sh
+ExecStopPost=/opt/mycenter/deploy/current-tools/backup-recover.sh
+UMask=0077
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=full
+ReadWritePaths=/opt/mycenter /run/lock
+TimeoutStartSec=1h

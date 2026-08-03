@@ -1,0 +1,55 @@
+{
+  "settings": {
+    "cert": "__MYCENTER_DOMAIN__",
+    "WANonly": true,
+    "LANonly": false,
+    "exactPorts": true,
+    "port": 443,
+    "redirPort": 80,
+    "mpsPort": 0,
+    "selfUpdate": false,
+    "allowFraming": false,
+    "allowLoginToken": false,
+    "webRTC": false,
+    "agentPong": 300,
+    "sessionKey": "__MYCENTER_SESSION_KEY__",
+    "authLog": "/opt/meshcentral/meshcentral-data/auth.log",
+    "autoBackup": false,
+    "maxInvalidLogin": {
+      "time": 10,
+      "count": 5,
+      "coolofftime": 30
+    }
+  },
+  "domains": {
+    "": {
+      "title": "MyCenter",
+      "title2": "Remote Systems Console",
+      "siteStyle": 3,
+      "showModernUIToggle": false,
+      "minify": false,
+      "newAccounts": false,
+      "allowedOrigin": false,
+      "footer": "MyCenter is based on the MeshCentral and MeshAgent open-source projects.",
+      "loginfooter": "MyCenter is based on the MeshCentral and MeshAgent open-source projects.",
+      "passwordRequirements": {
+        "min": 14,
+        "upper": 1,
+        "lower": 1,
+        "numeric": 1,
+        "nonalpha": 1,
+        "oldPasswordBan": 5,
+        "banCommonPasswords": true,
+        "loginTokens": false
+      }
+    }
+  },
+  "letsEncrypt": {
+    "email": "__ACME_EMAIL__",
+    "names": "__MYCENTER_DOMAIN__",
+    "production": false,
+    "rsaKeySize": 3072,
+    "skipChallengeVerification": false,
+    "nochecks": false
+  }
+}

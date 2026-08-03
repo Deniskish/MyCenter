@@ -1,0 +1,25 @@
+[Unit]
+Description=Reconcile the MyCenter container at boot
+Documentation=file:/opt/mycenter/src/deploy/README.md
+Requires=docker.service
+After=docker.service network-online.target
+Wants=network-online.target
+ConditionPathExists=/opt/mycenter/deploy/.env
+ConditionPathExists=/opt/mycenter/deploy/docker-compose.yml
+ConditionPathExists=/opt/mycenter/deploy/current-tools/backup.sh
+ConditionPathExists=!/opt/mycenter/state/maintenance-incomplete
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=root
+Group=root
+WorkingDirectory=/opt/mycenter/deploy
+Environment=MYCENTER_RESTART_POLICY=unless-stopped
+ExecStart=/usr/bin/docker compose --project-name mycenter --env-file /opt/mycenter/deploy/.env --file /opt/mycenter/deploy/docker-compose.yml up -d --no-build mycenter
+ExecStop=/usr/bin/docker compose --project-name mycenter --env-file /opt/mycenter/deploy/.env --file /opt/mycenter/deploy/docker-compose.yml stop --timeout 45 mycenter
+TimeoutStartSec=10min
+TimeoutStopSec=2min
+
+[Install]
+WantedBy=multi-user.target

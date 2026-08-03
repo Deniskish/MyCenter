@@ -314,3 +314,11 @@ __pycache__/
 docs/__pycache__/
 docs/env/
 docker-compose.yaml
+
+# MyCenter deployment secrets and generated transfer/runtime artifacts.
+/.env
+/deploy/.env
+/deploy/config.json
+/deploy/.runtime/
+*.bundle
+*.bundle.sha256
