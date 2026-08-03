@@ -3992,15 +3992,15 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
         if (domain == null) { parent.debug('web', 'handleManifestRequest: no domain'); res.sendStatus(404); return; }
         parent.debug('web', 'handleManifestRequest()');
         var manifest = {
-            "name": (domain.title != null) ? domain.title : 'MeshCentral',
-            "short_name": (domain.title != null) ? domain.title : 'MeshCentral',
-            "description": "Open source web based, remote computer management.",
+            "name": (domain.title != null) ? domain.title : 'MyCenter',
+            "short_name": (domain.title != null) ? domain.title : 'MyCenter',
+            "description": "MyCenter - Remote Systems Console.",
             "scope": ".",
             "start_url": "/",
             "display": "fullscreen",
             "orientation": "any",
-            "theme_color": "#ffffff",
-            "background_color": "#ffffff",
+            "theme_color": "#07110A",
+            "background_color": "#07110A",
             "icons": [{
                 "src": "pwalogo.png",
                 "sizes": "512x512",
@@ -4162,7 +4162,7 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
             try { res.sendFile(obj.path.join(obj.parent.webPublicOverridePath, 'android-chrome-512x512.png')); } catch (ex) { res.sendStatus(404); }
         } else {
             // Use the default logo picture
-            try { res.sendFile(obj.path.join(obj.parent.webPublicPath, 'android-chrome-512x512.png')); } catch (ex) { res.sendStatus(404); }
+            try { res.sendFile(obj.path.join(obj.parent.webPublicPath, 'images/mycenter-pwa-512.png')); } catch (ex) { res.sendStatus(404); }
         }
     }
 
@@ -4519,7 +4519,7 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
         if ((urlName == null) || (domain.redirects[urlName] == null) || (urlName[0] == '_')) { res.sendStatus(404); return; }
         if (domain.redirects[urlName] == '~showversion') {
             // Show the current version
-            res.end('MeshCentral v' + obj.parent.currentVer);
+            res.end('MyCenter v' + obj.parent.currentVer);
         } else {
             // Perform redirection
             res.redirect(domain.redirects[urlName] + urlArgs + getQueryPortion(req));
@@ -5934,7 +5934,7 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
         try {
             const deviceCookie = parent.encodeCookie({ a: 'checkAuth', c: cookie.c, u: cookie.u, n: cookie.n, s: cookie.s });
             var code = Buffer.from(cookie.c, 'base64').toString();
-            var payload = { notification: { title: (domain.title ? domain.title : 'MeshCentral'), body: "Authentication - " + code }, data: { url: '2fa://auth?code=' + cookie.c + '&c=' + deviceCookie } };
+            var payload = { notification: { title: (domain.title ? domain.title : 'MyCenter'), body: "Authentication - " + code }, data: { url: '2fa://auth?code=' + cookie.c + '&c=' + deviceCookie } };
             var options = { priority: 'High', timeToLive: 60 }; // TTL: 1 minute
             parent.firebase.sendToDevice(user.otpdev, payload, options, function (id, err, errdesc) {
                 if (err == null) {
@@ -7218,7 +7218,7 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
             }
 
             // Finish setup security headers
-            var cspBase = "default-src 'none'; font-src 'self' fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' " + extraScriptSrc + "; connect-src 'self'" + geourl + selfurl + "; img-src 'self' blob: data:" + geourl + extraImgSrc + " data:; style-src 'self' 'unsafe-inline' fonts.googleapis.com; frame-src 'self' blob: mcrouter:" + extraFrameSrc + "; media-src 'self'; form-action 'self' " + duoSrc + "; manifest-src 'self'";
+            var cspBase = "default-src 'none'; font-src 'self' data:; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' " + extraScriptSrc + "; connect-src 'self'" + geourl + selfurl + "; img-src 'self' blob: data:" + geourl + extraImgSrc + " data:; style-src 'self' 'unsafe-inline'; frame-src 'self' blob: mcrouter:" + extraFrameSrc + "; media-src 'self'; form-action 'self' " + duoSrc + "; manifest-src 'self'";
             if (hasAllowedFramingOrigins) {
                 var frameAncestors = "'self'" + (framingOrigins.length > 0 ? ' ' + framingOrigins.join(' ') : '');
                 cspBase += "; frame-ancestors " + frameAncestors;
@@ -8909,7 +8909,7 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
                                                 // Cause push notification to device
                                                 const code = Buffer.from(obj.common.zeroPad(getRandomSixDigitInteger(), 6)).toString('base64');
                                                 const authCookie = parent.encodeCookie({ a: 'checkAuth', c: code, u: user._id, n: user.otpdev });
-                                                var payload = { notification: { title: "MeshCentral", body: user.name + " authentication" }, data: { url: '2fa://auth?code=' + code + '&c=' + authCookie } };
+                                                var payload = { notification: { title: "MyCenter", body: user.name + " authentication" }, data: { url: '2fa://auth?code=' + code + '&c=' + authCookie } };
                                                 var options = { priority: 'High', timeToLive: 60 }; // TTL: 1 minute
                                                 parent.firebase.sendToDevice(user.otpdev, payload, options, function (id, err, errdesc) {
                                                     if (err == null) { parent.debug('email', 'Successfully auth check send push message to device'); } else { parent.debug('email', 'Failed auth check push message to device, error: ' + errdesc); }
@@ -9065,7 +9065,7 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
                                     // Cause push notification to device
                                     const code = Buffer.from(obj.common.zeroPad(getRandomSixDigitInteger(), 6)).toString('base64');
                                     const authCookie = parent.encodeCookie({ a: 'checkAuth', c: code, u: user._id, n: user.otpdev });
-                                    var payload = { notification: { title: "MeshCentral", body: user.name + " authentication" }, data: { url: '2fa://auth?code=' + code + '&c=' + authCookie } };
+                                    var payload = { notification: { title: "MyCenter", body: user.name + " authentication" }, data: { url: '2fa://auth?code=' + code + '&c=' + authCookie } };
                                     var options = { priority: 'High', timeToLive: 60 }; // TTL: 1 minute
                                     parent.firebase.sendToDevice(user.otpdev, payload, options, function (id, err, errdesc) {
                                         if (err == null) { parent.debug('email', 'Successfully auth check send push message to device'); } else { parent.debug('email', 'Failed auth check push message to device, error: ' + errdesc); }
@@ -10139,13 +10139,13 @@ module.exports.CreateWebServer = function (parent, db, args, certificates, doneF
         if (req.query.minify == '1') { minify = true; } else if (req.query.minify == '0') { minify = false; }
         xargs.min = minify ? '-min' : '';
         xargs.titlehtml = domain.titlehtml;
-        xargs.title = (domain.title != null) ? domain.title : 'MeshCentral';
+        xargs.title = (domain.title != null) ? domain.title : 'MyCenter';
         if (
             ((page == 'login2') && (domain.loginpicture == null) && (domain.titlehtml == null)) ||
             ((page != 'login2') && (domain.titlepicture == null) && (domain.titlehtml == null))
         ) {
             if (domain.title == null) {
-                xargs.title1 = 'MeshCentral';
+                xargs.title1 = 'MyCenter';
                 xargs.title2 = '';
             } else {
                 xargs.title1 = domain.title;

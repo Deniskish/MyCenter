@@ -10,7 +10,9 @@
     <link type="text/css" href="styles/style.css" media="screen" rel="stylesheet" title="CSS" />
     <link type="text/css" href="styles/xterm.css" media="screen" rel="stylesheet" title="CSS" />
     {{{customCSSTags}}}
-    <link rel="apple-touch-icon" href="/favicon-303x303.png" />
+    <link rel="icon" type="image/x-icon" href="{{{domainurl}}}images/mycenter-favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="{{{domainurl}}}images/mycenter-favicon.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="{{{domainurl}}}images/mycenter-pwa-192.png" />
     <script type="text/javascript" src="scripts/common-0.0.1{{min}}.js"></script>
     <script type="text/javascript" src="scripts/agent-desktop-0.0.2{{min}}.js"></script>
     <script type="text/javascript" src="scripts/amt-desktop-0.0.2{{min}}.js"></script>
@@ -407,8 +409,8 @@
             x += addInfo("NodeID", recFileMetadata.nodeid);
             if (recFileMetadata.protocol) {
                 var p = recFileMetadata.protocol;
-                if (p == 1) { p = "MeshCentral Terminal"; }
-                else if (p == 2) { p = "MeshCentral Desktop"; }
+                if (p == 1) { p = "MyCenter Terminal"; }
+                else if (p == 2) { p = "MyCenter Desktop"; }
                 else if (p == 6) { p = "Admin PowerShell"; }
                 else if (p == 8) { p = "User Shell"; }
                 else if (p == 9) { p = "User PowerShell"; }
@@ -675,7 +677,7 @@
             QH('timespan', '00:00:00');
             QV('metadatadiv', true);
             if (urlargs.stream == null) {
-                QH('metadatadiv', '<span style=\"font-family:Arial,Helvetica Neue,Helvetica,sans-serif;font-size:28px\">MeshCentral Session Player</span><br /><br /><span style=color:gray>' + "Drag & drop a .mcrec file or click \"Open File...\"" + '</span>');
+                QH('metadatadiv', '<span style=\"font-family:Lucida Console,Cascadia Mono,Courier New,monospace;font-size:28px\">MyCenter Session Player</span><br /><br /><span style=color:gray>' + "Drag & drop a .mcrec file or click \"Open File...\"" + '</span>');
             } else {
                 QH('metadatadiv', '');
             }

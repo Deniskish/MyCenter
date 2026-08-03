@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">MyCenter application icon</title>
+  <path fill="#07110A" d="M0 0h512v512H0z"/>
+  <path fill="none" stroke="#39FF6A" stroke-width="28" stroke-linejoin="miter" d="M56 56h400v304H56zM168 456h176M216 360v96M296 360v96"/>
+  <path fill="#39FF6A" d="M112 136h32v144h-32zm32 0h32v32h-32zm32 32h32v32h-32zm32-32h32v144h-32zm96 0h112v32H304zm-32 32h32v80h-32zm32 80h112v32H304z"/>
+</svg>

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">MyCenter</title>
+  <path fill="none" stroke="#39FF6A" stroke-width="4" stroke-linejoin="miter" d="M6 6h52v40H6zM22 56h20M28 46v10M36 46v10"/>
+  <path fill="#39FF6A" d="M13 16h4v20h-4zm4 0h4v4h-4zm4 4h4v4h-4zm4-4h4v20h-4zm12 0h14v4H37zm-4 4h4v12h-4zm4 12h14v4H37z"/>
+</svg>

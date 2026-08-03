@@ -1,29 +1,16 @@
 var MeshCentralTheme = (function () {
-  var darkBaseThemes = { cyborg: true, darkly: true, solar: true, vapor: true };
-
-  /**
-   * Return a safe theme key for storage, comparisons, and stylesheet paths.
-   * Valid theme names are lowercased, for example "Materia" becomes "materia".
-   * Missing, non-string, or unsafe values return "default".
-   *
-   * @param {string} theme Theme name selected by the user or loaded from localStorage.
-   * @returns {string} Normalized theme key, or "default" when the input is invalid.
-   */
-  function normalizeTheme(theme) {
-    if ((typeof theme !== "string") || !/^[a-z0-9_-]+$/i.test(theme)) return "default";
-    return theme.toLowerCase();
+  // MyCenter ships one local theme. This prevents a saved Bootswatch selection
+  // from loading remote font imports and keeps the production UI deterministic.
+  function normalizeTheme() {
+    return "default";
   }
 
-  // Build the Bootswatch stylesheet URL for a normalized theme key.
-  function getThemeHref(theme) {
-    var normalizedTheme = normalizeTheme(theme);
-    var safeTheme = (normalizedTheme != "default") ? encodeURIComponent(normalizedTheme) : encodeURIComponent("..");
-    return "styles/themes/" + safeTheme + "/bootstrap-min.css";
+  function getThemeHref() {
+    return "styles/bootstrap-min.css";
   }
 
-  // Identify Bootswatch themes whose base palette is dark even before night mode.
-  function isDarkBaseTheme(theme) {
-    return darkBaseThemes[normalizeTheme(theme)] === true;
+  function isDarkBaseTheme() {
+    return false;
   }
 
   // Apply the selected theme stylesheet to the active page.
@@ -41,12 +28,7 @@ var MeshCentralTheme = (function () {
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
-
-  // Load saved theme from local storage
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    MeshCentralTheme.applyTheme(savedTheme);
-  }
+  MeshCentralTheme.applyTheme("default");
 
   // Initialize Select2 on all select elements with the 'select2' class
   $(".select2").select2({

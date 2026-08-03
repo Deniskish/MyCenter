@@ -8,10 +8,9 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="robots" content="noindex,nofollow">
     <link rel="manifest" href="{{{domainurl}}}manifest.json">
-    <link rel="shortcut icon" href="{{{domainurl}}}favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{{domainurl}}}favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{{domainurl}}}favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/favicon-303x303.png" />
+    <link rel="icon" type="image/x-icon" href="{{{domainurl}}}images/mycenter-favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="{{{domainurl}}}images/mycenter-favicon.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="{{{domainurl}}}images/mycenter-pwa-192.png" />
     <link type="text/css" href="styles/xterm.css" media="screen" rel="stylesheet" title="CSS" />
     {{{customCSSTags}}}
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -4152,7 +4151,7 @@
         }
 
         function deviceToastFunctionEx() {
-            meshserver.send({ action: 'toast', nodeids: [currentNode._id], title: 'MeshCentral', msg: Q('d2devToast').value });
+            meshserver.send({ action: 'toast', nodeids: [currentNode._id], title: 'MyCenter', msg: Q('d2devToast').value });
         }
 
         // && ((meshrights == 0xFFFFFFFF) || ((meshrights & 65536) == 0))
@@ -7746,7 +7745,7 @@
 
         function p20installAndroidDialog() {
             if (xxdialogMode) return;
-            var x = '<div style=text-align:center><p>' + "Install the MeshCentral Agent on your Android device. Once installed, click the pairing link to connect your device to this server." + '</p>';
+            var x = '<div style=text-align:center><p>' + "Install the MyCenter Agent on your Android device. The compatible component is based on the original MeshAgent. Once installed, click the pairing link to connect your device to this server." + '</p>';
             x += '<p><a rel=\"noreferrer noopener\" target=_blank href=\"https://play.google.com/store/apps/details?id=com.meshcentral.agent2\"><img style=cursor:pointer src=\"images/google-play-140.png\" width=140 srcset=\"images/google-play-280.png 2x\" /></a></p>';
             x += '<p><a rel=\"noreferrer noopener\" target=_blank href=\"https://www.amazon.co.uk/gp/product/B097Z4Q7SK/\"><img style=cursor:pointer src=\"images/amazon-appstore-140.png\"  width=140 srcset=\"images/amazon-appstore-280.png 2x\" /></a></p>';
             x += '<p><a rel=\"noreferrer noopener\" target=_blank href="meshagents?id=14' + (urlargs.key?('&key=' + urlargs.key):'') + '" title="' + "APK version of the MeshAgent" + '">' + "Android APK" + '</a></p>';

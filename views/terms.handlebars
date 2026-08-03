@@ -9,7 +9,9 @@
     <meta name="robots" content="noindex,nofollow" />
     <link type="text/css" href="styles/style.css" media="screen" rel="stylesheet" title="CSS" />
     {{{customCSSTags}}}
-    <link rel="apple-touch-icon" href="/favicon-303x303.png" />
+    <link rel="icon" type="image/x-icon" href="{{{domainurl}}}images/mycenter-favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="{{{domainurl}}}images/mycenter-favicon.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="{{{domainurl}}}images/mycenter-pwa-192.png" />
     <script type="text/javascript" src="scripts/common-0.0.1{{min}}.js"></script>
     {{{customJSTags}}}
     <title>{{{title}}} - Terms of use</title>
@@ -43,6 +45,12 @@
         </div>
         <div id="column_l" style="max-height:calc(100vh - 135px);overflow-y:auto">
             <h1>Terms of use</h1>
+            <section class="mc-legal-notice" aria-labelledby="mycenterLegalTitle">
+                <h2 id="mycenterLegalTitle">MyCenter Legal</h2>
+                <p>MyCenter is based on the MeshCentral and MeshAgent open-source projects.</p>
+                <p>The compatible MyCenter Agent distributed by this service is the original MeshAgent component; its protocol and security identity have not been modified by the MyCenter web rebranding.</p>
+                <p>Upstream source: <a rel="noreferrer noopener" href="https://github.com/Ylianst/MeshCentral">MeshCentral</a> and <a rel="noreferrer noopener" href="https://github.com/Ylianst/MeshAgent">MeshAgent</a>.</p>
+            </section>
             <p>Please contact the site administrator for terms of use.</p>
             <hr />
             <p class="MsoNormal">
@@ -171,7 +179,10 @@
         var logoutControls = JSON.parse(decodeURIComponent('{{{logoutControls}}}'));
 
         var terms = '{{{terms}}}';
-        if (terms != '') { QH('column_l', decodeURIComponent(terms)); }
+        if (terms != '') {
+            QH('column_l', decodeURIComponent(terms));
+            Q('column_l').insertAdjacentHTML('afterbegin', '<section class="mc-legal-notice" aria-labelledby="mycenterLegalTitle"><h2 id="mycenterLegalTitle">MyCenter Legal</h2><p>MyCenter is based on the MeshCentral and MeshAgent open-source projects.</p><p>The compatible MyCenter Agent distributed by this service is the original MeshAgent component; its protocol and security identity have not been modified by the MyCenter web rebranding.</p><p>Upstream source: <a rel="noreferrer noopener" href="https://github.com/Ylianst/MeshCentral">MeshCentral</a> and <a rel="noreferrer noopener" href="https://github.com/Ylianst/MeshAgent">MeshAgent</a>.</p></section>');
+        }
         QV('column_l', true);
         userInterfaceSelectMenu();
 

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 72" role="img" aria-labelledby="title desc">
+  <title id="title">MyCenter</title>
+  <desc id="desc">Pixel monitor mark with the letters MC and the text MyCenter</desc>
+  <g transform="translate(4 4)">
+    <path fill="none" stroke="#39FF6A" stroke-width="4" stroke-linejoin="miter" d="M2 2h56v44H2zM20 58h20M26 46v12M34 46v12"/>
+    <path fill="#39FF6A" d="M10 13h4v22h-4zm4 0h4v4h-4zm4 4h4v4h-4zm4-4h4v22h-4zm12 0h15v4H34zm-4 4h4v14h-4zm4 14h15v4H34z"/>
+  </g>
+  <text x="76" y="39" fill="#E4FFE9" font-family="Lucida Console, Cascadia Mono, Courier New, monospace" font-size="30" font-weight="700" letter-spacing="1">MyCenter</text>
+  <text x="78" y="58" fill="#91B99A" font-family="Lucida Console, Cascadia Mono, Courier New, monospace" font-size="11" letter-spacing="1.5">REMOTE SYSTEMS CONSOLE</text>
+</svg>

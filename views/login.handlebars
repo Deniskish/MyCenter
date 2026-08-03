@@ -8,10 +8,11 @@
     <meta name="format-detection" content="telephone=no" />
     <meta name="robots" content="noindex,nofollow">
     <link rel="manifest" href="{{{domainurl}}}manifest.json">
-    <link rel="shortcut icon" type="image/x-icon" href="{{{domainurl}}}favicon.ico" />
     <link keeplink=1 type="text/css" href="styles/style.css" media="screen" rel="stylesheet" title="CSS" />
     {{{customCSSTags}}}
-    <link rel="apple-touch-icon" href="/favicon-303x303.png" />
+    <link rel="icon" type="image/x-icon" href="{{{domainurl}}}images/mycenter-favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="{{{domainurl}}}images/mycenter-favicon.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="{{{domainurl}}}images/mycenter-pwa-192.png" />
     <script type="text/javascript" src="scripts/common-0.0.1{{min}}.js"></script>
     {{{customJSTags}}}
     <script keeplink=1 type="text/javascript" src="scripts/u2f-api{{min}}.js"></script>
@@ -37,7 +38,7 @@
         </div>
         <div id=column_l>
             <h1>Welcome</h1>
-            <div id="welcomeText" style="display:none">Connect to your home or office devices from anywhere in the world using MeshCentral, the real time, open source remote monitoring and management web site. You will need to download and install a management agent on your computers. Once installed, computers will show up in the &quot;My Devices&quot; section of this web site and you will be able to monitor them and take control of them.</div>
+            <div id="welcomeText" style="display:none">MyCenter is a self-hosted remote systems console. Install the compatible MyCenter Agent on computers you are authorized to manage. Connected systems appear in My Devices, where access remains subject to account permissions and consent policy.</div>
             <table id="centralTable" style="">
                 <tr>
                     <td id="welcomeimage">
@@ -461,7 +462,7 @@
             if (welcomeText) {
                 QH('welcomeText', welcomeText);
             } else {
-                QH('welcomeText', addTextLink('MeshCentral', Q('welcomeText').innerHTML, 'http://www.meshcommander.com/meshcentral2'));
+                QH('welcomeText', Q('welcomeText').innerHTML);
             }
             QV('welcomeText', true);
 

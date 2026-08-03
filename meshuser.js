@@ -2080,7 +2080,7 @@ module.exports.CreateMeshUser = function (parent, db, ws, req, args, domain, use
                         // Perform web push notification
                         var payload = { body: command.msg, icon: 8 }; // Icon 8 is the user icon.
                         if (command.url) { payload.url = command.url; }
-                        if (domain.title != null) { payload.title = domain.title; } else { payload.title = "MeshCentral"; }
+                        if (domain.title != null) { payload.title = domain.title; } else { payload.title = "MyCenter"; }
                         payload.title += ' - ' + user.name;
                         parent.performWebPush(domain, chguser, payload, { TTL: 60 }); // For now, 1 minute TTL
                     }
@@ -2122,7 +2122,7 @@ module.exports.CreateMeshUser = function (parent, db, ws, req, args, domain, use
 
                             // Perform web push notification
                             var payload = { body: "Chat Request, Click here to accept.", icon: 8, url: url }; // Icon 8 is the user icon.
-                            if (domain.title != null) { payload.title = domain.title; } else { payload.title = "MeshCentral"; }
+                            if (domain.title != null) { payload.title = domain.title; } else { payload.title = "MyCenter"; }
                             payload.title += ' - ' + user.name;
                             parent.performWebPush(domain, chguser, payload, { TTL: 60 }); // For now, 1 minute TTL
                         }
@@ -3344,7 +3344,7 @@ module.exports.CreateMeshUser = function (parent, db, ws, req, args, domain, use
                     if (common.validateString(command.title, 1, 512) == false) { delete command.title } // Check title
                     if ((command.title == null) && (typeof domain.notificationmessages == 'object') && (typeof domain.notificationmessages.title == 'string')) { command.title = domain.notificationmessages.title; }
                     if ((command.title == null) && (typeof domain.title == 'string')) { command.title = domain.title; }
-                    if (command.title == null) { command.title = "MeshCentral"; }
+                    if (command.title == null) { command.title = "MyCenter"; }
 
                     for (i in command.nodeids) {
                         // Get the node and the rights for this node
@@ -4068,7 +4068,7 @@ module.exports.CreateMeshUser = function (parent, db, ws, req, args, domain, use
                         const authCookie = parent.parent.encodeCookie({ a: 'addAuth', c: code, u: user._id, n: node._id });
 
                         // Send out a push message to the device
-                        var payload = { notification: { title: "MeshCentral", body: user.name + " authentication" }, data: { url: '2fa://auth?code=' + code + '&c=' + authCookie } };
+                        var payload = { notification: { title: "MyCenter", body: user.name + " authentication" }, data: { url: '2fa://auth?code=' + code + '&c=' + authCookie } };
                         var options = { priority: 'High', timeToLive: 60 }; // TTL: 1 minute
                         parent.parent.firebase.sendToDevice(node, payload, options, function (id, err, errdesc) {
                             if (err == null) {
